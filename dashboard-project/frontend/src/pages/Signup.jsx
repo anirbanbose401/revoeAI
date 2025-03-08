@@ -18,6 +18,7 @@ const Signup = () => {
     }
   }, [user, navigate]);
 
+  // Handle signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
@@ -29,7 +30,7 @@ const Signup = () => {
 
       if (res.status === 201) {
         alert("Signup successful! Please login.");
-        navigate("/login"); // 🔴 Redirect to Login page instead of Dashboard
+        navigate("/login"); // Redirect to Login page instead of Dashboard
       } else {
         throw new Error("Signup failed");
       }

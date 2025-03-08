@@ -1,6 +1,9 @@
-import axios from "axios";
+import axios from "axios"; // Import the Axios library
 
-axios.defaults.baseURL = "http://localhost:5000"; // Your backend URL
-axios.defaults.withCredentials = true; // ✅ Ensures cookies (JWT) are sent
+// Set the base URL for all Axios requests to your backend URL
+axios.defaults.baseURL = "http://localhost:5000";
 
-export default axios;
+// Ensure that cookies (such as JWT tokens) are sent with each request
+axios.defaults.withCredentials = true;
+
+export default axios; // Export the configured Axios instance

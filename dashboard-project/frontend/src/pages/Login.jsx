@@ -16,15 +16,16 @@ const Login = () => {
     }
   }, [user, navigate]);
 
+  // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      navigate("/dashboard");
+      await login(email, password); // Attempt to log in
+      navigate("/dashboard"); // Navigate to dashboard on success
     } catch (error) {
-      alert("Login failed. Please try again.");
+      alert("Login failed. Please try again."); // Show error message on failure
     }
-  };  
+  };
 
   return (
     <div className="flex items-center justify-center bg-[#010510] bg-opacity-0">

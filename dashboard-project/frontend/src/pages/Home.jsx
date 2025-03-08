@@ -10,11 +10,13 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
+  // Function to open the modal with specific content (login or signup)
   const openModal = (content) => {
     setModalContent(content);
     setIsModalOpen(true);
   };
 
+  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
     setModalContent(null);

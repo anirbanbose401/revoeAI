@@ -23,11 +23,14 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    // Check if user already exists
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ message: "User already exists" });
 
+    // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create a new user instance and save to the database
     user = new User({ name, email, password: hashedPassword });
     await user.save();
 
@@ -51,12 +54,14 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
+    // Compare the provided password with the stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       console.log("Password incorrect!");
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
+    // Generate a JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     console.log("User authenticated successfully! Sending response.");
@@ -80,6 +85,7 @@ router.post("/login", async (req, res) => {
 // ✅ GET LOGGED-IN USER DATA (NEW)
 router.get("/me", authMiddleware, async (req, res) => {
   try {
+    // Fetch user data excluding the password
     const user = await User.findById(req.user.id).select("-password"); // ✅ Exclude password
     res.json({ user });
   } catch (error) {

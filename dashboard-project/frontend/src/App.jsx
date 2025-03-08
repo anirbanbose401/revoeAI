@@ -12,10 +12,19 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} /> {/* Redirect to Home */}
-          <Route path="/home" element={<Home />} /> {/* Add Home route */}
+          {/* Redirect to Home */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          
+          {/* Home route */}
+          <Route path="/home" element={<Home />} />
+          
+          {/* Login route */}
           <Route path="/login" element={<Login />} />
+          
+          {/* Signup route */}
           <Route path="/signup" element={<Signup />} />
+          
+          {/* Protected Dashboard route */}
           <Route
             path="/dashboard"
             element={

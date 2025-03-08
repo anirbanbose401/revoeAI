@@ -17,21 +17,21 @@ router.get("/", async (req, res) => {
         );
 
         const rows = response.data.values;
-        if (!rows || rows.length === 0) return res.json([]);
+        if (!rows || rows.length === 0) return res.json([]); // Return empty array if no data
 
         // Convert array into JSON object
-        const headers = rows[0];
+        const headers = rows[0]; // First row as headers
         const data = rows.slice(1).map((row) =>
             headers.reduce((acc, header, index) => {
-                acc[header] = row[index] || "";
+                acc[header] = row[index] || ""; // Map each row to an object
                 return acc;
             }, {})
         );
 
-        res.json(data);
+        res.json(data); // Respond with the formatted data
     } catch (error) {
         console.error("❌ Error fetching Google Sheet data:", error.message);
-        res.status(500).json({ error: "Failed to fetch data" });
+        res.status(500).json({ error: "Failed to fetch data" }); // Handle errors
     }
 });
 
